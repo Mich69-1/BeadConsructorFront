@@ -81,7 +81,7 @@ function renderSpecSvg () {
 
 }
 
-// Функция сохраняет спецификацию из модального окна в pdf
+// Функция сохраняет спецификацию из скрытого div в svg
 function saveSpecToSvg () {
   renderSpecSvg ()
   modal_doc = document.querySelector('#specExport > svg')
