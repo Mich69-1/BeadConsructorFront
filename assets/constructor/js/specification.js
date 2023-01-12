@@ -71,17 +71,20 @@ function renderSpec () {
     swatch.center(10,10)
     swatch.fill(palettePickerGrads[color])
   }
+  saveSpecToSvg ()
 }
 
 // Функция рисует спецификацию целиком в svg для сохранения и отправки
 function renderSpecSvg () {
-  var draw = SVG().addTo('#specExport').size('210mm','297mm').viewbox(0, 0, 210, 297)
+  var specExp = SVG().addTo('#specExport').size('210mm','297mm').viewbox(0, 0, 210, 297)
+  specExp.circle(105) // тут будет формирование спец-ии
 
 }
 
 // Функция сохраняет спецификацию из модального окна в pdf
 function saveSpecToSvg () {
-  modal_doc = document.querySelector('#drawing > svg')
+  renderSpecSvg ()
+  modal_doc = document.querySelector('#specExport > svg')
   document.querySelector('#nablob').setAttribute('href',bloberize(modal_doc))
 }
 
