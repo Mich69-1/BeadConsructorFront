@@ -75,6 +75,7 @@ function renderSpec () {
 
 // Функция рисует спецификацию целиком в svg для сохранения и отправки
 function renderSpecSvg () {
+  var draw = SVG().addTo('#specExport').size('210mm','297mm').viewbox(0, 0, 210, 297)
 
 }
 

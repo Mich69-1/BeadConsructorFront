@@ -137,3 +137,12 @@ section {
   border-bottom: 1px solid lightgray;
 }
 
+.spec-export {
+  width: 1050px;
+  height: 1485px;
+}
+
+.hidden_ {
+  display: none;
+}
+
