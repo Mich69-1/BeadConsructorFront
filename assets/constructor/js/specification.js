@@ -77,12 +77,18 @@ function renderSpec () {
 // Функция рисует спецификацию целиком в svg для сохранения и отправки
 function renderSpecSvg () {
   var specExp = SVG().addTo('#specExport').size('210mm','297mm').viewbox(0, 0, 210, 297)
-  specExp.circle(105) // тут будет формирование спец-ии
+  var specBasePath = specExp.path('m 12.772216,54.378676 c 14.48282,20.968982 39.480698,-25.078993 65.505333,-24.73846 20.479664,0.267977 7.712201,32.346568 32.802021,33.833827 25.08982,1.487258 13.4345,-36.449074 38.49531,-40.516569 25.644,-4.162148 30.19135,55.231914 48.39447,48.837861')
+  specBasePath.attr({fill: 'none', stroke: '#000', 'stroke-width': 0.2})
+  var scaleFact = specBasePath.length()/spreadLength
+  var specPalette = createStepGrads(10,specExp)
+  // тут будет формирование спец-ии
+  
 
 }
 
 // Функция сохраняет спецификацию из скрытого div в svg
 function saveSpecToSvg () {
+  document.querySelector('#specExport').innerHTML = ''
   renderSpecSvg ()
   modal_doc = document.querySelector('#specExport > svg')
   document.querySelector('#nablob').setAttribute('href',bloberize(modal_doc))
