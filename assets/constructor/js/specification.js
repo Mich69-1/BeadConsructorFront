@@ -97,13 +97,31 @@ function renderSpecSvg () {
         specDraw[index].data('pAt', atPath);  //точка на кривой
     } else count++
   })
+  // таблица
   var textStyleSm = {'font-style' : 'normal', 'font-weight' : 'normal', 'font-size' : '3.175px', 'font-family' : 'sans-serif', 'fill' : '#000000','stroke' : 'none'}
   var textStyleSReg = {'font-style' : 'normal', 'font-weight' : 'normal', 'font-size' : '3.52778px', 'font-family' : 'sans-serif', 'fill' : '#000000','stroke' : 'none'}
   var textStyleBd = {'font-style' : 'normal', 'font-weight' : 'bold', 'font-size' : '3.52778px', 'font-family' : 'sans-serif', 'fill' : '#000000','stroke' : 'none'}
-  baseStr = isBeadsFit ? 'Длина основы: ' + Math.round(spreadLength) + 'мм' : 'Длина основы:' + Math.round(spreadLength) + 'мм' +  ' (не помещается ' + count + ' бусин!)'
-  textInfobase = specExp.text(baseStr)
-  textInfobase.attr({x: 9.67, y: 75.58});
-  textInfobase.attr(textStyleSm);
+  baseStr = isBeadsFit ? 'Длина основы: ' + Math.round(spreadLength) + 'мм' : 'Длина основы:' + Math.round(spreadLength) + 'мм' +  ' (не помещается ' + count + ' !)'
+  var textInfobase = specExp.text(baseStr).attr({x: 9.67, y: 75.58}).attr(textStyleSm);
+  var textTableHd = {
+    col1 : specExp.text('Порядковый номер').attr({x: 9.67, y: 91.45}).attr(textStyleBd),
+    col2 : specExp.text('Диаметр').attr({x: 76.82, y: 91.45}).attr(textStyleBd),
+    col3 : specExp.text('Цвет').attr({x: 131.01, y: 91.45}).attr(textStyleBd),
+    col4 : specExp.text('Количество').attr({x: 174.74, y: 91.45}).attr(textStyleBd)
+  }
+  var textTableRws = []
+  specBeads.forEach(function (bead, index){
+    textTableRws.push({
+      line : specExp.path('M 9.9377927, ' + String(94.43699 + 8*index) +' H 200.07292').attr({fill: 'none', stroke: '#000', 'stroke-width': 0.1}),
+      number : specExp.text(String(index + 1)).attr({x: 9.67, y: 100.4 + 8*index}).attr(textStyleSReg),
+      diam : specExp.text(String(bead.diam)).attr({x: 76.82, y: 100.4 + 8*index}).attr(textStyleSReg),
+      color : specExp.circle(6).center(134.34, 98.4 + 8*index).fill(specPalette[bead.colorindex]),
+      amount : specExp.text(String(bead.sum)).attr({x: 174.74, y: 100.4 + 8*index}).attr(textStyleSReg)
+    })
+    specExp.path('M 9.9377927, ' + String(94.43699 + 8*specBeads.length) +' H 200.07292').attr({fill: 'none', stroke: '#000', 'stroke-width': 0.1})
+  })
+
+
   //Таблица спецификации
 }
 
