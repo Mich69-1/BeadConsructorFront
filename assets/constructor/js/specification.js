@@ -83,15 +83,28 @@ function renderSpecSvg () {
   var scaleFact = specBasePath.length()/spreadLength
   var specPalette = createStepGrads(10,specExp)
   // иллюстрация (возможно надо несколько форм, в зависимости от длины)
+  var isBeadsFit = checkLength(spreadLength)
+  var fitted = 0, count = 0
   storeBeads.forEach(function(elem,index) {
-    var sdiam = elem.diam*scaleFact
-    specDraw.push(specExp.circle(sdiam))
-    var atPath = (index == 0) ? sdiam/2 : specDraw[index-1].data('pAt') + specDraw[index-1].attr('r') + specDraw[index].attr('r')
-    var p = specBasePath.pointAt(atPath)
-    specDraw[index].fill(specPalette[elem.colorindex])
-    specDraw[index].center(p.x, p.y)
-    specDraw[index].data('pAt', atPath);  //точка на кривой
+      var sdiam = elem.diam*scaleFact
+      fitted += sdiam
+      if (fitted <= specBasePath.length()- sdiam) {
+        specDraw.push(specExp.circle(sdiam))
+        var atPath = (index == 0) ? sdiam/2 : specDraw[index-1].data('pAt') + specDraw[index-1].attr('r') + specDraw[index].attr('r')
+        var p = specBasePath.pointAt(atPath)
+        specDraw[index].fill(specPalette[elem.colorindex])
+        specDraw[index].center(p.x, p.y)
+        specDraw[index].data('pAt', atPath);  //точка на кривой
+    } else count++
   })
+  var textStyleSm = {'font-style' : 'normal', 'font-weight' : 'normal', 'font-size' : '3.175px', 'font-family' : 'sans-serif', 'fill' : '#000000','stroke' : 'none'}
+  var textStyleSReg = {'font-style' : 'normal', 'font-weight' : 'normal', 'font-size' : '3.52778px', 'font-family' : 'sans-serif', 'fill' : '#000000','stroke' : 'none'}
+  var textStyleBd = {'font-style' : 'normal', 'font-weight' : 'bold', 'font-size' : '3.52778px', 'font-family' : 'sans-serif', 'fill' : '#000000','stroke' : 'none'}
+  baseStr = isBeadsFit ? 'Длина основы: ' + Math.round(spreadLength) + 'мм' : 'Длина основы:' + Math.round(spreadLength) + 'мм' +  ' (не помещается ' + count + ' бусин!)'
+  textInfobase = specExp.text(baseStr)
+  textInfobase.attr({x: 9.67, y: 75.58});
+  textInfobase.attr(textStyleSm);
+  //Таблица спецификации
 }
 
 
