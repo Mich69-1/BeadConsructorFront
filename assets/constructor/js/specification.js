@@ -76,15 +76,25 @@ function renderSpec () {
 
 // Функция рисует спецификацию целиком в svg для сохранения и отправки
 function renderSpecSvg () {
+  var specDraw = []
   var specExp = SVG().addTo('#specExport').size('210mm','297mm').viewbox(0, 0, 210, 297)
   var specBasePath = specExp.path('m 12.772216,54.378676 c 14.48282,20.968982 39.480698,-25.078993 65.505333,-24.73846 20.479664,0.267977 7.712201,32.346568 32.802021,33.833827 25.08982,1.487258 13.4345,-36.449074 38.49531,-40.516569 25.644,-4.162148 30.19135,55.231914 48.39447,48.837861')
   specBasePath.attr({fill: 'none', stroke: '#000', 'stroke-width': 0.2})
   var scaleFact = specBasePath.length()/spreadLength
   var specPalette = createStepGrads(10,specExp)
-  // тут будет формирование спец-ии
-  
-
+  // иллюстрация (возможно надо несколько форм, в зависимости от длины)
+  storeBeads.forEach(function(elem,index) {
+    var sdiam = elem.diam*scaleFact
+    specDraw.push(specExp.circle(sdiam))
+    var atPath = (index == 0) ? sdiam/2 : specDraw[index-1].data('pAt') + specDraw[index-1].attr('r') + specDraw[index].attr('r')
+    var p = specBasePath.pointAt(atPath)
+    specDraw[index].fill(specPalette[elem.colorindex])
+    specDraw[index].center(p.x, p.y)
+    specDraw[index].data('pAt', atPath);  //точка на кривой
+  })
 }
+
+
 
 // Функция сохраняет спецификацию из скрытого div в svg
 function saveSpecToSvg () {
