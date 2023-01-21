@@ -118,11 +118,8 @@ function renderSpecSvg () {
       color : specExp.circle(6).center(134.34, 98.4 + 8*index).fill(specPalette[bead.colorindex]),
       amount : specExp.text(String(bead.sum)).attr({x: 174.74, y: 100.4 + 8*index}).attr(textStyleSReg)
     })
-    specExp.path('M 9.9377927, ' + String(94.43699 + 8*specBeads.length) +' H 200.07292').attr({fill: 'none', stroke: '#000', 'stroke-width': 0.1})
   })
-
-
-  //Таблица спецификации
+  specExp.path('M 9.9377927, ' + String(94.43699 + 8*specBeads.length) +' H 200.07292').attr({fill: 'none', stroke: '#000', 'stroke-width': 0.1})
 }
 
 
