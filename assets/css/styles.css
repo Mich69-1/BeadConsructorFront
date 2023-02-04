@@ -127,7 +127,7 @@ section {
 .shrink33 {
   display: flex;
   justify-content: space-around;
-  flex-basis: 100px;
+  flex-basis: 60px;
   align-items: center;
   flex-shrink: 1;
   flex-grow: 2;
@@ -158,5 +158,17 @@ section {
   font-variant-numeric:normal;
   font-variant-east-asian:normal;
   fill:#000000;stroke:none;
+}
+
+.controls-tip {
+  fill:#9e9292;
+}
+
+.controls-tip:hover {
+  fill:#c9bfbf;
+}
+
+.controls-tip:focus {
+  fill:#8f1a1a;
 }
 
