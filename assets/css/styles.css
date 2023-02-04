@@ -160,15 +160,15 @@ section {
   fill:#000000;stroke:none;
 }
 
-.controls-tip {
+.controls-tip > path {
   fill:#9e9292;
 }
 
-.controls-tip:hover {
+.controls-tip:hover > path {
   fill:#c9bfbf;
 }
 
-.controls-tip:focus {
+.controls-tip:active > path {
   fill:#8f1a1a;
 }
 
