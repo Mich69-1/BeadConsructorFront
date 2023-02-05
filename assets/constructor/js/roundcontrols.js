@@ -97,6 +97,17 @@ function tipbuttons_handler(geom, tipstring) {
 }
 
 // Скрыть/показать подсказки
+tipbattons_check.addEventListener('click', () => {
+  document.querySelectorAll('.controls-tip').forEach((item) => {
+    if (tipbattons_check.checked) {
+      item.classList.add('hidden_')
+      item.classList.remove('controls-tip-selected')
+      tipwindow_text.innerHTML = 'Снимите галочку, если нужны подсказки'
+    } else {
+      item.classList.remove('hidden_')
+    }
+  })
+})
 
 
 
